@@ -1,11 +1,14 @@
 package org.example.Revise.OOP;
 
 
+import org.example.Revise.CollectionsKnow.ListOnes.ArrayListColl;
+import org.example.Revise.CollectionsKnow.ListOnes.Others;
+import org.example.Revise.CollectionsKnow.MapsOnes.OneInPeace;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class Execution {
@@ -16,9 +19,21 @@ public class Execution {
     }
 
     static void CollectionsResults(){
-        CollectionsRevise cols = new CollectionsRevise();
-        cols.showEachCollections();
-
+        ArrayListColl listColl = new ArrayListColl();
+        showCollection(listColl.collArrayList());
+        cleanOutput();
+        //---------------------------------------------
+        Others others = new Others();
+        others.showLinkedList();
+        others.showStackColl();
+        //---------------------------------------------
+        cleanOutput();
+        others.showAbstractList();
+        //------------------------------------
+        cleanOutput();
+        OneInPeace oneInPeace = new OneInPeace();
+        oneInPeace.showHashMap();
+        oneInPeace.showTreeMap();
     }
     static void InheritanceResults() {
         System.out.println("Differences");
@@ -111,5 +126,12 @@ public class Execution {
 
     public static void cleanOutput() {
         System.out.println("\n-----------------------------------\n");
+    }
+
+    static <Type> void showCollection(Collection<Type> coll) {
+        for (Type collElement : coll) {
+            System.out.print(collElement + " \t");
+        }
+        coll.clear();
     }
 }
