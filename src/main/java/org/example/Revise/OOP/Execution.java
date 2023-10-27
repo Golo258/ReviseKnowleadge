@@ -4,15 +4,23 @@ package org.example.Revise.OOP;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class Execution {
 
     public static void main(String[] args) {
-        getResults();
+//        InheritanceResults();
+        CollectionsResults();
     }
 
-    static void getResults() {
+    static void CollectionsResults(){
+        CollectionsRevise cols = new CollectionsRevise();
+        cols.showEachCollections();
+
+    }
+    static void InheritanceResults() {
         System.out.println("Differences");
         Figure figure = new Figure(12.5);
         SquareFigure square = new SquareFigure(12.5, "kwadrat");
@@ -65,15 +73,14 @@ public class Execution {
 //        #----------------------------
         cleanOutput();
         // serializacja
-        try{
+        try {
             ObjectOutputStream output = new ObjectOutputStream(
                     new FileOutputStream("student.ser")
             );
             Student student = new Student("Alice", 20, "1234");
             output.writeObject(student);
             System.out.println(student);
-        }
-        catch (Exception exception){
+        } catch (Exception exception) {
             exception.printStackTrace();
         }
         // Deserializacja
@@ -84,9 +91,25 @@ public class Execution {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        //------------------------------------------------
+        // wyjatki
+        cleanOutput();
+        DbConnection dbConnection = new DbConnection(false);
+        try{
+            dbConnection.connect();
+        } catch (CustomException e) {
+            System.out.println("Custom exception: " + e.getMessage());
+        }
+        catch(Exception exception){
+            System.out.println("Different exception " + exception.getMessage());
+        }
+        finally{
+            System.out.println("It's going to execute");
+        }
+
     }
 
-    static void cleanOutput() {
+    public static void cleanOutput() {
         System.out.println("\n-----------------------------------\n");
     }
 }

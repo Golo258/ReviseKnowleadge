@@ -4,7 +4,6 @@ package org.example.Revise.OOP;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 /*
@@ -14,17 +13,18 @@ pochodna dziediczy po klasie nadrzednej
 key word - extends - klasa dziedziczy od innej
 
  */
-public class Combo {
+public class Dziedziczenie {
 
 }
 
-class Figure{
+class Figure {
     private double square;
 
     public Figure(double square) {
         this.square = square;
     }
-    double countSquare(int numberOfSides){
+
+    double countSquare(int numberOfSides) {
         return this.square * numberOfSides;
     }
 
@@ -37,9 +37,10 @@ class Figure{
     }
 }
 
-class SquareFigure extends Figure{
+class SquareFigure extends Figure {
     private String nameOfFigure;
-    public SquareFigure(double side, String name){
+
+    public SquareFigure(double side, String name) {
         super(side);
         this.nameOfFigure = name;
     }
@@ -62,19 +63,20 @@ zdolnośc obiektu do przyjmowania wielu form
  */
 
 class Shape { // base class
-    public void draw(){
+    public void draw() {
         System.out.println("I draw a figure");
     }
 }
 
-class Circle extends  Shape { // pochodna klasy
+class Circle extends Shape { // pochodna klasy
 
     @Override
     public void draw() {
         System.out.println("I draw a cricle");
     }
 }
-class Rectangle extends  Shape{
+
+class Rectangle extends Shape {
     @Override
     public void draw() {
         System.out.println("i draw an rectangle");
@@ -89,8 +91,9 @@ stanowia szkic
 key word abstract
 abstrakcyjne metody musza byc zaimplementowane w klasach pochodnych dziedzicaczych po abstract
  */
-abstract class Animal{
+abstract class Animal {
     private String name;
+
     // abstract method
     public abstract void makeSound();
 
@@ -102,13 +105,15 @@ abstract class Animal{
         return name;
     }
 }
-class Dog extends Animal{
+
+class Dog extends Animal {
     public Dog(String name) {
         super(name);
     }
+
     @Override
     public void makeSound() {
-        System.out.println("Class:" + getClass().getName() + " with attribute: "  + getName() + " says Woof!");
+        System.out.println("Class:" + getClass().getName() + " with attribute: " + getName() + " says Woof!");
     }
 
 }
@@ -127,22 +132,26 @@ class Cat extends Animal {
 Interasy - mozna dziedziczyć wiele
 */
 
-interface Vehicle{
+interface Vehicle {
     final int constant_var = 12;
+
     void start();
+
     void stop();
 }
-interface Radio{
+
+interface Radio {
     void playMusic();
 }
 
-class BMW implements Vehicle, Radio{
+class BMW implements Vehicle, Radio {
     @Override
-    public void start(){
+    public void start() {
         System.out.println("BMW is starting");
     }
+
     @Override
-    public void stop(){
+    public void stop() {
         System.out.println("BMW stops driving");
     }
 
@@ -159,18 +168,20 @@ Pomagaja w tworzeniu klas reprezentujacych dane które nie zawieraja dodatkowje 
 pola rekordu w {} pola sa niemutowalne - niezmienialne po zainicjowaniu
 nie moga byc rozszerzalne przez dziedziczenie
 */
-record Book(String title, String author,  int publicationYear){
-    public boolean isBestSeller(){
+record Book(String title, String author, int publicationYear) {
+    public boolean isBestSeller() {
         return publicationYear >= 2000;
     }
 }
 
-class Library{
+class Library {
     private List<Book> books = new ArrayList<>();
-    public void addBook(Book book){
+
+    public void addBook(Book book) {
         books.add(book);
     }
-    public List<Book> getBooksPublishedAfterYear(int year){
+
+    public List<Book> getBooksPublishedAfterYear(int year) {
         return books.stream()
                 .filter(b -> b.publicationYear() > year)
                 .collect(Collectors.toList());
@@ -181,23 +192,26 @@ class Library{
 Generics
  */
 
-class Box<T>{
+class Box<T> {
     private T content;
 
     public Box(T content) {
         this.content = content;
     }
-    public T getCntent(){
+
+    public T getCntent() {
         return content;
     }
 }
-class StringBox extends Box<String>{
-    public StringBox(String strContent){
+
+class StringBox extends Box<String> {
+    public StringBox(String strContent) {
         super(strContent);
     }
 }
+
 //#--- inny przykłąd
-class ListNode<T>{
+class ListNode<T> {
     private T data;
     private ListNode<T> next;
 
@@ -218,16 +232,16 @@ class ListNode<T>{
     }
 }
 
-class GenericList<T>{
+class GenericList<T> {
     private ListNode<T> head;
-    public void add (T newData){
+
+    public void add(T newData) {
         ListNode<T> newNode = new ListNode<>(newData);
-        if (head == null){
+        if (head == null) {
             head = newNode;
-        }
-        else{
+        } else {
             ListNode<T> current = head;
-            while (current.getNext() != null){
+            while (current.getNext() != null) {
 
             }
         }
@@ -241,7 +255,7 @@ umożliwia przesyłanie obiektó przez siec i zapisywanie do plików
 Za pomoca interfasu Serializable
 
  */
-class Person implements Serializable{
+class Person implements Serializable {
     private String name;
     private int age;
 
@@ -249,14 +263,17 @@ class Person implements Serializable{
         this.name = name;
         this.age = age;
     }
+
     @Override
     public String toString() {
         return "Person [name=" + name + ", age=" + age + "]";
     }
 
 }
-class Student extends Person{
+
+class Student extends Person {
     private String id;
+
     public Student(String name, int age, String studentId) {
         super(name, age);
         this.id = studentId;
@@ -264,12 +281,49 @@ class Student extends Person{
 
     @Override
     public String toString() {
-        return "Student [studentId=" + this.id + ", name="  + ", age=" + getAge() + "]";
+        return "Student [studentId=" + this.id + "]";
     }
+}
+//#-----------------------
+/*
+WYJATKI:
+throw new Exception -> wywoływanie wyjątku
+throws -> przy funckji okresla że moze zgłaszać wyjatki
+ale i ch nie obsługuje
 
+przekazuje odpowiedzialnosc za złąpanie wyjatku przy jej wywołąniu
+
+ */
+class CustomException extends Exception {
+
+    public CustomException(String message) {
+        super(message);
+    }
 }
 
+class DbConnection {
+    private boolean connectionSuccess;
 
+    public DbConnection(boolean connectionSuccess) {
+        this.connectionSuccess = connectionSuccess;
+    }
+
+    public void connect() throws CustomException {
+        if (!isConnectionSuccess()) {
+            throw new CustomException("Error with connection");
+        } else {
+            System.out.println("Connection sucessfull");
+        }
+    }
+
+    public boolean isConnectionSuccess() {
+        return connectionSuccess;
+    }
+
+    public void setConnectionSuccess(boolean connectionSuccess) {
+        this.connectionSuccess = connectionSuccess;
+    }
+}
 
 
 
