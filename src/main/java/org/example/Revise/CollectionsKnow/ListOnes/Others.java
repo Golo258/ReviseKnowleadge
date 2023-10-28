@@ -93,8 +93,85 @@ public class Others {
         System.out.println(chars.get(1));
     }
 
-}
+    /**
+        FIFO
 
+     */
+    public void showLinkedQueue(){
+        Queue<String> kolejka = new LinkedList<>();
+        kolejka.offer("First"); // enqueue
+        kolejka.offer("ThIRD");
+        kolejka.offer("Second");
+        System.out.println(kolejka);
+        String elem = kolejka.poll();
+        System.out.println(elem + " has been removed");
+        System.out.println("Actualised queue: " + kolejka);
+    }
+
+    /**
+     ArrayDeque -> oparta na tablicy
+     efektywna gdy chcemy dodawac/ usuwac z poczatka i konca kolejki
+     przechwouje w kolejnosci jakiej dodajemy
+     */
+    public void showArryayDeque(){
+        Deque<String> stringDeque = new ArrayDeque<>();
+        stringDeque.add("First");
+        stringDeque.add("352abc");
+        stringDeque.add("sfasf");
+        System.out.println(stringDeque + " : " + stringDeque.poll());
+    }
+    /**
+     PiorityQueue -> kolejka priorytetowa
+     elementy sa przechowywane w porzadku rosnacy/malejacym lub od priorytetu
+     */
+    public void showPriorityQueue(){
+        PriorityQueue<Task> taskQueue = new PriorityQueue<>(new TaskComparator());
+        taskQueue.add( new Task(1, "Example 1", "dzisiaj"));
+        taskQueue.add( new Task(5, "Example 2", "pojutrze"));
+        taskQueue.add( new Task(5, "Example 3", "jutro"));
+        taskQueue.add( new Task(2, "Example 4", "nazajutrz"));
+        System.out.println(taskQueue);
+    }
+}
+class Task{
+    private int priority;
+    private String name;
+    private String term;
+
+    public Task(int priority, String name, String term) {
+        this.priority = priority;
+        this.name = name;
+        this.term = term;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public String getTerm() {
+        return term;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "priority=" + priority +
+                ", name='" + name + '\'' +
+                ", term='" + term + '\'' +
+                '}';
+    }
+}
+class TaskComparator implements Comparator<Task>{
+    @Override
+    public int compare(Task one, Task another) {
+        if(one.getPriority() != another.getPriority()){
+            return one.getPriority() - another.getPriority();
+        }
+        else{
+            return one.getTerm().length() - another.getTerm().length();
+        }
+    }
+}
 /**
  * Niemutowalność-- immutability
  * odnosi się do cechy obiektów -, które nie mogą byćmodyfikowane po ich utworzeniu
@@ -137,22 +214,3 @@ class ImmutableClass {
     } // there is not setters
 }
 
-/**
- * HashMap: HashMap to implementacja mapy, która przechowuje pary klucz-wartość. Pozwala na efektywne wyszukiwanie wartości na podstawie klucza.
- * <p>
- * HashSet: HashSet to kolekcja typu set, która przechowuje unikalne elementy. Nie pozwala na duplikaty.
- * <p>
- * LinkedHashSet: LinkedHashSet to rodzaj kolekcji typu set, który zachowuje kolejność elementów, w której zostały one dodane.
- * <p>
- * TreeMap: TreeMap to implementacja mapy, która przechowuje pary klucz-wartość w uporządkowanym porządku na podstawie klucza.
- * <p>
- * TreeSet: TreeSet to kolekcja typu set, która przechowuje elementy w uporządkowanym porządku.
- * <p>
- * Queue: Queue to interfejs reprezentujący kolekcję, która działa na zasadzie kolejki (FIFO - First-In-First-Out). LinkedList jest często używany jako implementacja kolejki.
- * <p>
- * Hashtable: Hashtable to implementacja mapy, podobna do HashMap, ale jest w pełni zsynchronizowana.
- * <p>
- * ConcurrentHashMap: ConcurrentHashMap to implementacja mapy, która jest zoptymalizowana pod kątem współbieżności i może być używana w wielowątkowych środowiskach.
- * <p>
- * LinkedHashMap: LinkedHashMap to implementacja mapy, która zachowuje kolejność dodawania elementów.
- */

@@ -4,6 +4,8 @@ package org.example.Revise.OOP;
 import org.example.Revise.CollectionsKnow.ListOnes.ArrayListColl;
 import org.example.Revise.CollectionsKnow.ListOnes.Others;
 import org.example.Revise.CollectionsKnow.MapsOnes.OneInPeace;
+import org.example.Revise.CollectionsKnow.SetsOnes.SetInOne;
+import org.example.Revise.MultiThreading.ThreadsExplanation;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -15,26 +17,59 @@ public class Execution {
 
     public static void main(String[] args) {
 //        InheritanceResults();
-        CollectionsResults();
+//        CollectionsResults();
+        ThreadingEx();
     }
 
-    static void CollectionsResults(){
+    static void ThreadingEx() {
+        ThreadsExplanation expl = new ThreadsExplanation();
+        expl.definingThreads();
+        expl.showingCallableUse();
+        cleanOutput();
+        expl.showAsynchronise();
+//        expl.showVollatile();
+    }
+
+    static void CollectionsResults() {
+//        Lists
         ArrayListColl listColl = new ArrayListColl();
         showCollection(listColl.collArrayList());
         cleanOutput();
-        //---------------------------------------------
         Others others = new Others();
         others.showLinkedList();
         others.showStackColl();
-        //---------------------------------------------
         cleanOutput();
         others.showAbstractList();
         //------------------------------------
+        // Maps
         cleanOutput();
         OneInPeace oneInPeace = new OneInPeace();
         oneInPeace.showHashMap();
         oneInPeace.showTreeMap();
+        cleanOutput();
+        oneInPeace.showLinkedHashMap();
+        oneInPeace.predicateExamples();
+        cleanOutput();
+        oneInPeace.showEnumMap();
+        //-------------------------------------
+        // Sety
+        cleanOutput();
+        SetInOne setInOne = new SetInOne();
+        setInOne.showHashSet();
+        cleanOutput();
+        setInOne.showLinkedHashSet();
+        setInOne.showTreeSet();
+        cleanOutput();
+        setInOne.showEnumSet();
+//        #---------------------------------
+        cleanOutput();
+        others.showLinkedQueue();
+        others.showArryayDeque();
+        others.showPriorityQueue();
+        cleanOutput();
+        setInOne.showBitSet();
     }
+
     static void InheritanceResults() {
         System.out.println("Differences");
         Figure figure = new Figure(12.5);
@@ -110,15 +145,13 @@ public class Execution {
         // wyjatki
         cleanOutput();
         DbConnection dbConnection = new DbConnection(false);
-        try{
+        try {
             dbConnection.connect();
         } catch (CustomException e) {
             System.out.println("Custom exception: " + e.getMessage());
-        }
-        catch(Exception exception){
+        } catch (Exception exception) {
             System.out.println("Different exception " + exception.getMessage());
-        }
-        finally{
+        } finally {
             System.out.println("It's going to execute");
         }
 
